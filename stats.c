@@ -23,6 +23,32 @@ void count_ready_out(struct proc *p)
     p->waiting_time += set_time_diff_now(p->time_ready);
 }
 
+// Contabilização do processo ao entrar (IN) na fila de aptos de baixa prioridade
+void count_ready2_in(struct proc *p)
+{
+    printf("Process %d added to ready2 queue\n", p->pid); // Debug message
+    // Contabilizando o número de entradas na fila de aptos de baixa prioridade
+    p->num_ready++;
+
+    // Tempo que o processo entra na fila de aptos de baixa prioridade
+    set_time_now(&p->time_ready);
+}
+
+// Contabilização do processo ao sair (OUT) da fila de aptos de baixa prioridade
+void count_ready2_out(struct proc *p)
+{
+    printf("Process %d removed from ready2 queue\n", p->pid); // Debug message
+    // Contabilizando o tempo que ele ficou na fila de aptos de baixa prioridade
+    p->waiting_time += set_time_diff_now(p->time_ready);
+}
+
+void count_running_in(struct proc *p)
+{
+    printf("Process %d started running\n", p->pid); // Mensagem de debug
+    // Configura o tempo de início da execução, se necessário
+    set_time_now(&p->time_start);
+}
+
 // Contabilização do processo ao entrar (IN) na fila de bloqueados
 void count_blocked_in(struct proc *p)
 {
@@ -93,4 +119,3 @@ void accounting(struct queue *q)
     printf("_______________________________\n");
 
 }
-
