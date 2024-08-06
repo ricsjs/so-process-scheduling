@@ -23,7 +23,7 @@ struct proc *scheduler(struct proc *current)
      */
     if (current != NULL)
     {
-        printf("Handling current process %d with state %d\n", current->pid, current->state);
+        printf("Lidando com o processo atual %d com estado%d\n", current->pid, current->state);
         
         // Verificando o estado em que o processo executando está
         switch (current->state) 
